@@ -1,14 +1,15 @@
 import asyncio
 import json
 import os
-from dotenv import load_dotenv
+
+import ollama
 from aiogram import Bot, Dispatcher
 from aiogram.filters import CommandStart
 from aiogram.types import Message
-import ollama
+from dotenv import load_dotenv
 from loguru import logger
 
-from prompt_builder import find_client, build_prompt
+from prompt_builder import build_prompt, find_client
 
 load_dotenv()
 BOT_TOKEN = os.getenv("BOT_TOKEN")
@@ -26,6 +27,7 @@ MODEL_NAME = "llama3"
 bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher()
 
+
 @dp.message(CommandStart())
 async def start_handler(message: Message):
     user_id = message.from_user.id
@@ -41,6 +43,7 @@ async def start_handler(message: Message):
         "Здравствуйте! Я — ИИ-менеджер премиального автосалона.\n"
         "Пожалуйста, представьтесь: отправьте своё имя (то же, что в CRM)."
     )
+
 
 @dp.message()
 async def message_handler(message: Message):
@@ -65,7 +68,9 @@ async def message_handler(message: Message):
             return
         user_to_client[user_id] = client_name
         user_histories[user_id] = []
-        logger.info(f"USER_ID: {user_id} | CLIENT_NAME: {client_name} успешно идентифицирован")
+        logger.info(
+            f"USER_ID: {user_id} | CLIENT_NAME: {client_name} успешно идентифицирован"
+        )
         await message.answer(f"Привет, {client_name}! Чем могу помочь?")
         return
 
@@ -80,16 +85,17 @@ async def message_handler(message: Message):
 
     try:
         response = ollama.chat(model=MODEL_NAME, messages=history)
-        bot_reply = response['message']['content']
+        bot_reply = response["message"]["content"]
     except Exception as e:
         bot_reply = f"[Ошибка LLM: {e}]"
         logger.error(f"CLIENT_NAME: {client_name} | Ошибка LLM: {e}")
 
     history.append({"role": "assistant", "content": bot_reply})
-    user_histories[user_id] = history 
+    user_histories[user_id] = history
 
     logger.info(f"CLIENT_NAME: {client_name} | BOT: {bot_reply}\n")
     await message.answer(bot_reply)
+
 
 async def main():
     try:
@@ -98,5 +104,6 @@ async def main():
     finally:
         await bot.session.close()
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     asyncio.run(main())

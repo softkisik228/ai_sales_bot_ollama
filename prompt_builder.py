@@ -4,6 +4,7 @@ def find_client(crm_data_list, client_name):
             return row
     return None
 
+
 def build_prompt(client_data, client_message):
     """
     client_data: один словарь с полями client_name, budget, last_purchase, deal_status
