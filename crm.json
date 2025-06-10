@@ -1,0 +1,40 @@
+{
+  "clients": [
+    {
+      "client_name": "Алексей",
+      "budget": 150000,
+      "last_purchase": "Porsche Macan",
+      "deal_status": "Ведутся переговоры"
+    },
+    {
+      "client_name": "Мария",
+      "budget": 85000,
+      "last_purchase": "BMW X1",
+      "deal_status": "Ожидает ответа"
+    },
+    {
+      "client_name": "Иван",
+      "budget": 220000,
+      "last_purchase": "Mercedes GLE",
+      "deal_status": "Обсуждение условий сделки"
+    },
+    {
+        "client_name": "Елена",
+        "budget": 50000,
+        "last_purchase": "Volkswagen Tiguan",
+        "deal_status": "Завершено"
+    },
+    {
+        "client_name": "Сергей",
+        "budget": 120000,
+        "last_purchase": "Audi Q5",
+        "deal_status": "Ведутся переговоры"
+    },
+    {
+        "client_name": "Ольга",
+        "budget": 95000,
+        "last_purchase": "Toyota RAV4",
+        "deal_status": "Ожидает ответа"
+    }
+  ]
+}

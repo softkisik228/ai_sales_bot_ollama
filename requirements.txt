@@ -1,0 +1,4 @@
+aiogram==3.4.1
+ollama==0.1.7
+dotenv
+loguru
