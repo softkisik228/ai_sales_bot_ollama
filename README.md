@@ -13,7 +13,7 @@
 
 1. **Клонируйте репозиторий и перейдите в папку проекта**  
 ```bash
-git clone <твоя-ветка-с-кодом>
+git clone https://github.com/softkisik228/ai_sales_bot_ollama.git
 cd ai_sales_bot_ollama
 ```
 
